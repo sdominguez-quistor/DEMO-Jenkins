@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Values.name }}
+  labels:
+    app: {{ .Values.name }}
+    chart: "{{ .Chart.Name }}-{{ .Chart.Version }}"
+spec:
+  type: LoadBalancer
+  ports:
+  - name: http
+    port: {{ .Values.service.ports.app.port}}
+    targetPort: {{ .Values.service.ports.app.targetPort}}
+  selector:
+    app: {{ .Values.name }}
